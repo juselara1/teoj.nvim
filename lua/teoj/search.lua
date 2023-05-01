@@ -58,8 +58,9 @@ function find_match(initial_pos, pattern, left_priority)
         end
         return {row = initial_pos.row, columns=best_match}
     else
+        best_diff = nil
         for _, match in ipairs(matches) do
-            diff = match.start_pos - initial_pos.column
+            diff = match.start_pos - initial_pos.column - 1
             if diff >= 0 and (best_diff == nil or diff < best_diff) then
                 best_diff = diff
                 best_match = match

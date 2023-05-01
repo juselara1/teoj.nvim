@@ -7,7 +7,7 @@ teoj.nvim is a simple plugin written in Lua that allows you to define flexible a
 You can install this plugin using [packer](https://github.com/wbthomason/packer.nvim):
 
 ```lua
-use {"juselara1/teoj"}
+use "juselara1/teoj.nvim"
 ```
 
 ## Usage
@@ -60,3 +60,26 @@ end
 Here, we create a new text object `c` that selects texts between `# %%` and `# %%` (patterns are defined according to [Lua's specification](https://www.lua.org/pil/20.2.html)). However, inside excludes both patterns (the 3rd and 4th parameters are `false`) and around includes only the left pattern (the 3rd argument is `true` and the 4th is `false`). Here's an example:
 
 ![example2](docs/example2.gif)
+
+## Examples
+
+There are some examples of text objects:
+
+```lua
+binds = {
+    {mode = {'v', 'o'}, bind="ice", command=function () teoj.object("^# %%%%.*$", "^# %%%%.*$", false, false) end}, -- jupytext cell
+    {mode = {'v', 'o'}, bind="ace", command=function () teoj.object("^# %%%%.*$", "^# %%%%.*$", true, false) end}, -- jupytext cell
+    {mode = {'v', 'o'}, bind="imh1", command=function () teoj.object("^# .+$", "^# .+$", false, false) end}, -- markdown h1
+    {mode = {'v', 'o'}, bind="amh1", command=function () teoj.object("^# .+$", "^# .+$", true, false) end}, -- markdown h1
+    {mode = {'v', 'o'}, bind="imh2", command=function () teoj.object("^## .+$", "^##? .+$", false, false) end}, -- markdown h2
+    {mode = {'v', 'o'}, bind="amh2", command=function () teoj.object("^## .+$", "^##? .+$", true, false) end}, -- markdown h2
+    {mode = {'v', 'o'}, bind="imh3", command=function () teoj.object("^### .+$", "^##?#? .+$", false, false) end}, -- markdown h3
+    {mode = {'v', 'o'}, bind="amh3", command=function () teoj.object("^### .+$", "^##?#? .+$", true, false) end}, -- markdown h3
+    {mode = {'v', 'o'}, bind="i,", command=function () teoj.object("%,", "%,", false, false) end}, -- comma
+    {mode = {'v', 'o'}, bind="a,", command=function () teoj.object("%,", "%,", true, true) end}, -- comma
+    {mode = {'v', 'o'}, bind="i.", command=function () teoj.object("%.", "%.", false, false) end}, -- dot
+    {mode = {'v', 'o'}, bind="a.", command=function () teoj.object("%.", "%.", true, true) end}, -- dot
+    {mode = {'v', 'o'}, bind="i;", command=function () teoj.object("%;", "%;", false, false) end}, -- dot
+    {mode = {'v', 'o'}, bind="a;", command=function () teoj.object("%;", "%;", true, true) end}, -- dot
+}
+```
